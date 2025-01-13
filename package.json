@@ -1,0 +1,30 @@
+{
+  "name": "learning-react",
+  "version": "1.0.0",
+  "description": "I'm LEARNING REACT",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arbenz-007/Learning-React.git"
+  },
+  "keywords": [],
+  "author": "Rayan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arbenz-007/Learning-React/issues"
+  },
+  "homepage": "https://github.com/Arbenz-007/Learning-React#readme",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "browsersList":[
+    "last 2 version"
+  ]
+}
