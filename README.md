@@ -19,5 +19,41 @@
 
 
 
+# Foodie Buddy
+/*
+ *Header
+ * - Logo
+ * - Nav Items
+ *
+ *Body
+ * - Search
+ * - Card Container
+ *   - Restaurant card
+ *   -Img
+ *   -Name of The restaurant,Star Rating, cuisines,etc
+ *
+ *Footer
+ * - Copyright
+ * - Links
+ * - Address
+ * - Contact
+ */
+
+Two type of Export/Import
+
+-Default Export/Import
+
+export defalt component;
+import component from "path";
+
+--Named export import
+export const component;
+import {component} from "path";
+
+# React Hooks
+(Normal JS utility func.)
+--useState() - Superpowerful State Variable in react
+**whenever a state variable updates react rerenders the component**
+--useEffect()
 
  
