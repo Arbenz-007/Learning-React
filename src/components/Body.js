@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 
 import Shimmer from "./Shimmer";
 
+import { Link } from "react-router-dom";
+
 const Body = () => {
   //Local State Variable - Super Powerful Variable
   const [ListOfRestaurant, setListOfRestaurant] = useState([]);
 
-  const [filteredRestaurant, setFilteredRestaurant] =useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const [SearchText, setSearchText] = useState("");
-  
+
   //Whenever state variables update ,react triggers a reconciliation cycle(re-renders the component)
 
   useEffect(() => {
@@ -55,12 +57,10 @@ const Body = () => {
               // Filter the restaurant cards and update the UI
               // search text
 
-              const filteredRestaurant=ListOfRestaurant.filter((res)=>
+              const filteredRestaurant = ListOfRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(SearchText.toLowerCase())
               );
               setFilteredRestaurant(filteredRestaurant);
-              
-
             }}
           >
             Search
@@ -73,7 +73,8 @@ const Body = () => {
             const filteredList = ListOfRestaurant.filter(
               (res) => res.info.avgRating > 4.3
             );
-            setListOfRestaurant(filteredList);
+            // console.log(filteredList);
+            setFilteredRestaurant(filteredList);
           }}
         >
           Top Rated Restaurant
@@ -81,7 +82,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

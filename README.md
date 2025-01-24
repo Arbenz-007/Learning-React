@@ -54,6 +54,11 @@ import {component} from "path";
 (Normal JS utility func.)
 --useState() - Superpowerful State Variable in react
 **whenever a state variable updates react rerenders the component**
---useEffect()
+--useEffect( callback func()=>{},dependecy array(optional))
+
+
+# 2 types of Routing in web apps
+--client side Routing
+--server side Routing
 
  

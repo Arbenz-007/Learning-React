@@ -5,8 +5,8 @@
   border: border-box;
 }
 .header {
-  padding-right: 20px;
   height: 100px;
+  padding-right: 20px;
   background: #111827;
   display: flex;
   justify-content: space-between;
@@ -32,7 +32,6 @@
 }
 .nav-items > ul > li {
   padding: 10px;
-  position: relative;
 }
 
 .nav-items > ul > li:hover {
@@ -40,29 +39,20 @@
   cursor: pointer;
   transition: color 0.3s;
 }
-body {
-  display: flex;
-  justify-content: center; 
-  align-items: center;    
-  background-color: #F9FAFB; 
-  color: #1F2937; 
-}
 
 .res-container {
-  padding: 10px 100px;
+  padding: 20px 0;
   background-color: #fdf2e9;
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
   align-items: center;
   justify-content: space-evenly;
 }
 
 .res-card {
-  margin: 5px;
   padding: 5px;
-  width: 100%;
-  max-width: 280px;
+  width: 280px;
   height: 309px;
   border: 2px solid transparent;
   overflow: hidden;
@@ -120,7 +110,7 @@ body {
 }
 
 .shimmer-container {
-  padding: 10px 100px;
+  padding: 10px 0px;
   gap: 20px;
   display: flex;
   flex-wrap: wrap;
