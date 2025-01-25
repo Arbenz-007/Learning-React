@@ -52,7 +52,7 @@ const Body = () => {
             }}
           />
           <button
-            className="seacrh-btn"
+            className="search-btn"
             onClick={() => {
               // Filter the restaurant cards and update the UI
               // search text
@@ -82,7 +82,7 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <Link
+          <Link className="custom-link"
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >

@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import {MENU_API} from "../utils/constants.js";
+import { MENU_API } from "../utils/constants.js";
 
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
 
-  const {resId} = useParams();
+  const { resId } = useParams();
 
   useEffect(() => {
     fetchMenu();
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(MENU_API+resId+"&catalog_qa=undefined&submitAction=ENTER");
+    const data = await fetch(
+      MENU_API + resId + "&catalog_qa=undefined&submitAction=ENTER"
+    );
     const json = await data.json();
     // console.log(json);
     setResInfo(json.data);
@@ -22,7 +24,7 @@ const RestaurantMenu = () => {
     return <Shimmer />;
   }
 
-  const { name, cuisines, costForTwoMessage } =
+  const { name, avgRating, totalRatingsString, cuisines, costForTwoMessage } =
     resInfo?.cards[2]?.card?.card?.info;
 
   const { itemCards } =
@@ -30,9 +32,16 @@ const RestaurantMenu = () => {
 
   return (
     <div className="menu">
-      <h1>{resInfo.cards[2].card.card.info.name}</h1>
-      <h3>{cuisines.join(",")}</h3>
-      <h3>{costForTwoMessage}</h3>
+      <h1>{name}</h1>
+      <div className="menu-detail">
+        <div className="menu-rating-cost">
+          <h3>{avgRating} ({totalRatingsString})</h3>
+          <h3>{costForTwoMessage}</h3>
+        </div>
+        <h3>{cuisines.join(",")}</h3>
+      </div>
+
+      <h4>Menu</h4>
       <ul>
         {itemCards.map((item) => (
           <li key={item.card.info.id}>

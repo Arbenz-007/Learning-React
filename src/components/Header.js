@@ -1,10 +1,9 @@
 import foodieImage from "../img/foodie.png"; // Import the image
-import { useState , useEffect} from "react";
-import {Link} from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-
-  const [ btnNameReact, setbtnNameReact ] = useState("Login");
+  const [btnNameReact, setbtnNameReact] = useState("Login");
   console.log("header render");
 
   //if no dependency array  => useEffect is called on every render
@@ -12,34 +11,40 @@ const Header = () => {
   //if dependency array is [btnReact ] => called every time btnREact is updated
   useEffect(() => {
     console.log("useEffect called");
-  },);
-
-
-
+  });
 
   return (
     <div className="header">
       <div className="logo-container">
-        <img className="logo" src={foodieImage} alt="Foodie Logo" />
+        <Link to="/">
+          <img className="logo" src={foodieImage} alt="Foodie Logo" />
+        </Link>
       </div>
       <div className="nav-items">
         <ul>
           <li>
-            <Link to="/home">Home</Link>
-            </li>
+            <Link className="header-link" to="/">
+              Home
+            </Link>
+          </li>
           <li>
-           <Link to="/about">About us</Link> 
-            </li>
+            <Link className="header-link" to="/about">
+              About us
+            </Link>
+          </li>
           <li>
-            <Link to="/contact"> Contact Us</Link>
+            <Link className="header-link" to="/contact">
+              {" "}
+              Contact Us
+            </Link>
           </li>
           <li>Cart</li>
           <button
             className="login"
             onClick={() => {
-              btnNameReact === "Login" 
-              ? setbtnNameReact("Logout")
-              :setbtnNameReact("Login");
+              btnNameReact === "Login"
+                ? setbtnNameReact("Logout")
+                : setbtnNameReact("Login");
             }}
           >
             {btnNameReact}

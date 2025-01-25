@@ -1,13 +1,19 @@
-import { useRouteError } from "react-router-dom";
+import { useRouteError, useNavigate } from "react-router-dom";
 
 const Error = () => {
-
-    const err = useRouteError();
-    console.log(err);
+  const err = useRouteError();
+  const navigate = useNavigate(); 
+  console.log(err);
   return (
-    <div>
-      <h1>Oops!!!...Something went wrong</h1>
-      <h3>{err.status} :{err.statusText}</h3>
+    <div className="error-page">
+      <h1>Oops!!!...Something went wrong 🚨</h1>
+      <h2>
+        {err.status} : {err.statusText}
+      </h2>
+      <p>Don't worry, it's not your fault. Let's get you back on track!</p>
+      <button className="home-button" onClick={() => navigate("/")}>
+        Go Back Home
+      </button>
     </div>
   );
 };
