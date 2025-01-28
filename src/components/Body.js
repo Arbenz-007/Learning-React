@@ -6,6 +6,8 @@ import Shimmer from "./Shimmer";
 
 import { Link } from "react-router-dom";
 
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 const Body = () => {
   //Local State Variable - Super Powerful Variable
   const [ListOfRestaurant, setListOfRestaurant] = useState([]);
@@ -34,6 +36,10 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus=== false) return <h1>Looks like you are Offline</h1>
 
   //Conditional rendering
 

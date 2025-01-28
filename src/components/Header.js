@@ -1,6 +1,7 @@
 import foodieImage from "../img/foodie.png"; // Import the image
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
   const [btnNameReact, setbtnNameReact] = useState("Login");
@@ -9,9 +10,9 @@ const Header = () => {
   //if no dependency array  => useEffect is called on every render
   //if dependency array is empty= []=>useEffect is called on initial render only once
   //if dependency array is [btnReact ] => called every time btnREact is updated
-  useEffect(() => {
-    console.log("useEffect called");
-  });
+  
+
+  const onlineStatus=useOnlineStatus();
 
   return (
     <div className="header">
@@ -22,6 +23,9 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>
+            Online Status: {onlineStatus?"🟢":"🔴"}
+          </li>
           <li>
             <Link className="header-link" to="/">
               Home
@@ -34,8 +38,12 @@ const Header = () => {
           </li>
           <li>
             <Link className="header-link" to="/contact">
-              {" "}
               Contact Us
+            </Link>
+          </li>
+          <li>
+            <Link className="header-link" to="/grocery">
+            Grocery
             </Link>
           </li>
           <li>Cart</li>
