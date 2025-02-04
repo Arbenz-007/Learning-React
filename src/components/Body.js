@@ -1,12 +1,13 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import Shimmer from "./Shimmer";
 
 import { Link } from "react-router-dom";
 
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   //Local State Variable - Super Powerful Variable
@@ -15,6 +16,8 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const [SearchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   //Whenever state variables update ,react triggers a reconciliation cycle(re-renders the component)
 
@@ -37,9 +40,10 @@ const Body = () => {
     );
   };
 
-
   const onlineStatus = useOnlineStatus();
-  if(onlineStatus=== false) return <h1>Looks like you are Offline</h1>
+  if (onlineStatus === false) return <h1>Looks like you are Offline</h1>;
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   //Conditional rendering
 
@@ -47,18 +51,18 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
+      <div className="filter flex items-center flex-wrap gap-24 justify-center bg-[#f9fafb] ps-[30px]">
         <div className="search">
           <input
             type="text"
-            className="search-box"
+            className="search-box py-2 px-5 text-lg w-[400px] rounded-3xl mr-2 border-solid border-2 border-[#e5e7eb] "
             value={SearchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="py-3 px-5 text-[16px] font-bold bg-[#ff6f61] text-white border-none rounded-3xl cursor-pointer transtion duration-300 hover:bg-[#e6a50] hover:-translate-y-1"
             onClick={() => {
               // Filter the restaurant cards and update the UI
               // search text
@@ -73,7 +77,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="filter-btn"
+          className="filter-btn m-3 block cursor-pointer py-[10px] px-[20px] text-xl font-bold text-white bg-gradient-to-r from-[#ff6f61] to-[#f97316] border-none rounded-3xl transition duration-300 hover:-translate-y-1 hover:shadow-md"
           onClick={() => {
             //filter logic
             const filteredList = ListOfRestaurant.filter(
@@ -85,13 +89,23 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        <div>
+          <label htmlFor="name">UserName :</label>
+          <input
+            className="border border-black p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
-      <div className="res-container">
+      <div className="res-container p-5  bg-[#f9fafb] flex flex-wrap gap-5 items-center justify-evenly">
         {filteredRestaurant.map((restaurant) => (
-          <Link className="custom-link"
+          <Link
+            className="custom-link"
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
+            {/* If the restaurant is promoted then add a promoted labal to it */}
             <RestaurantCard resData={restaurant} />
           </Link>
         ))}

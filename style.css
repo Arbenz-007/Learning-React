@@ -1,9 +1,13 @@
-* {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ * {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
-}
+}/*
 .header {
   height: 100px;
   padding-right: 20px;
@@ -118,7 +122,7 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .filter-btn:hover {
-  transform: translateY(-3px); /* Lift effect */
+  transform: translateY(-3px); 
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -219,7 +223,6 @@
   transform: translateY(-2px);
 }
 
-/* Styling for about page*/
 .about-page {
   font-family: "Arial", sans-serif;
   color: #333;
@@ -289,7 +292,6 @@
   border: 1px solid #ff6f61;
 }
 
-/* Contact styling */
 .contact-page {
   font-family: "Arial", sans-serif;
   color: #fff;
@@ -389,7 +391,6 @@ submit-button:hover {
 .contact-info ul li strong {
   color: #ff6f61;
 }
-/* Error Page Styling */
 .error-page {
   display: flex;
   flex-direction: column;
@@ -459,9 +460,7 @@ submit-button:hover {
   margin-bottom: 10px;
 }
 
-
-/* /user card */
 .user-card{
   padding: 10px;
   border: 1px solid black;
-}
+} */

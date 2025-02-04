@@ -6,9 +6,11 @@ import Body from "./components/Body";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import {useState,useEffect} from "react";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 // import Grocery from './components/Grocery';
 
 
@@ -22,12 +24,30 @@ import Shimmer from "./components/Shimmer";
 const Grocery = lazy(()=>import("./components/Grocery"));
 
 const AppLayout = () => {
+
+
+  const [userName, setUserName]= useState();
+
+
+  //authentication
+
+  useEffect(()=>{
+    //make an API call and send username and password
+
+    const data ={
+      name: "Rayan",
+    };
+
+    setUserName(data.name);
+  },[]);
+
   return (
+    <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
     <div className="app">
       <Header />
       <Outlet />
-      
     </div>
+    </UserContext.Provider>
   );
 };
 
