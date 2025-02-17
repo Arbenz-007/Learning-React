@@ -61,4 +61,10 @@ import {component} from "path";
 --client side Routing
 --server side Routing
 
- 
+ # Redux Toolkit
+ - Intsall @reduxjs/toolkit and react-redux
+ - Build our store 
+ - connect our store to our app
+ - slice( card slice)
+ - dispacth func
+ - selector

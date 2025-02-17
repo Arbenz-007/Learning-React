@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnNameReact, setbtnNameReact] = useState("Login");
@@ -11,13 +12,16 @@ const Header = () => {
   //if no dependency array  => useEffect is called on every render
   //if dependency array is empty= []=>useEffect is called on initial render only once
   //if dependency array is [btnReact ] => called every time btnREact is updated
-  
 
-  const onlineStatus=useOnlineStatus();
+  const onlineStatus = useOnlineStatus();
 
-  const {loggedInUser}=useContext(UserContext);
+  const { loggedInUser } = useContext(UserContext);
 
-  console.log(loggedInUser);
+  //subscribing to the store using selector
+  const cartItems = useSelector((store) => store.cart.items);
+
+  // console.log(loggedInUser);
+  console.log(cartItems);
   return (
     <div className="h-32 flex justify-between items-center pr-5 bg-gray-800 border-solid border-b-2 border-red-400 ">
       <div className="logo-container">
@@ -28,30 +32,50 @@ const Header = () => {
       <div className="nav-items">
         <ul className="flex gap-10 text-gray-50 items-center ">
           <li className="p-[10px] hover:text-[#ff6f61] cursor-pointer ">
-            Online Status: {onlineStatus?"🟢":"🔴"}
+            Online Status: {onlineStatus ? "🟢" : "🔴"}
           </li>
           <li className="p-[10px] ">
-            <Link className="text-gray-50 hover:text-[#ff6f61] cursor-pointer " to="/">
+            <Link
+              className="text-gray-50 hover:text-[#ff6f61] cursor-pointer "
+              to="/"
+            >
               Home
             </Link>
           </li>
           <li className="p-[10px] ">
-            <Link className="text-gray-50 hover:text-[#ff6f61] cursor-pointer " to="/about">
+            <Link
+              className="text-gray-50 hover:text-[#ff6f61] cursor-pointer "
+              to="/about"
+            >
               About us
             </Link>
           </li>
           <li className="p-[10px] ">
-            <Link className="text-gray-50 hover:text-[#ff6f61] cursor-pointer " to="/contact">
+            <Link
+              className="text-gray-50 hover:text-[#ff6f61] cursor-pointer "
+              to="/contact"
+            >
               Contact Us
             </Link>
           </li>
           <li className="p-[10px]">
-            <Link className="text-gray-50 hover:text-[#ff6f61] cursor-pointer " to="/grocery">
-            Grocery
+            <Link
+              className="text-gray-50 hover:text-[#ff6f61] cursor-pointer "
+              to="/grocery"
+            >
+              Grocery
             </Link>
           </li>
-          <li className="p-[10px] hover:text-[#ff6f61] cursor-pointer ">Cart</li>
-          <button className="p-[10px] hover:text-[#ff6f61] cursor-pointer "
+          <li className="p-[10px] hover:text-[#ff6f61] cursor-pointer ">
+            <Link
+              className="text-gray-50 hover:text-[#ff6f61] cursor-pointer "
+              to="/cart"
+            >
+              Cart -({cartItems.length} items)
+            </Link>
+          </li>
+          <button
+            className="p-[10px] hover:text-[#ff6f61] cursor-pointer "
             onClick={() => {
               btnNameReact === "Login"
                 ? setbtnNameReact("Logout")
