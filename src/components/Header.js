@@ -1,21 +1,48 @@
 import foodieImage from "../img/foodie.png"; // Import the image
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../utils/fireBase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () => {
-  const [btnNameReact, setbtnNameReact] = useState("Login");
-  console.log("header render");
+  // console.log("header render");
 
   //if no dependency array  => useEffect is called on every render
   //if dependency array is empty= []=>useEffect is called on initial render only once
   //if dependency array is [btnReact ] => called every time btnREact is updated
 
   const onlineStatus = useOnlineStatus();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { loggedInUser } = useContext(UserContext);
+
+  const handleSignOutClick = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {
+        navigate("/error");
+      });
+  };
+
+  const name = useSelector((store)=>store.user);
+
+  useEffect(() => {
+    const unsubsribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        navigate("/home");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => unsubsribe();
+  }, []);
 
   //subscribing to the store using selector
   const cartItems = useSelector((store) => store.cart.items);
@@ -37,7 +64,7 @@ const Header = () => {
           <li className="p-[10px] ">
             <Link
               className="text-gray-50 hover:text-[#ff6f61] cursor-pointer "
-              to="/"
+              to="/home"
             >
               Home
             </Link>
@@ -76,15 +103,11 @@ const Header = () => {
           </li>
           <button
             className="p-[10px] hover:text-[#ff6f61] cursor-pointer "
-            onClick={() => {
-              btnNameReact === "Login"
-                ? setbtnNameReact("Logout")
-                : setbtnNameReact("Login");
-            }}
+            onClick={handleSignOutClick}
           >
-            {btnNameReact}
+            Sign out
           </button>
-          <li className=" text-gray-50">{loggedInUser}</li>
+          <li className=" text-gray-50">{name?.displayName ? `Hello, ${name.displayName}` : "Guest"}</li>
         </ul>
       </div>
     </div>

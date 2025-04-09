@@ -50,7 +50,7 @@ const Body = () => {
   return ListOfRestaurant.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
+    <div className="body ">
       <div className="filter flex items-center flex-wrap gap-24 justify-center bg-[#f9fafb] ps-[30px]">
         <div className="search">
           <input
@@ -65,7 +65,7 @@ const Body = () => {
             className="py-3 px-5 text-[16px] font-bold bg-[#ff6f61] text-white border-none rounded-3xl cursor-pointer transtion duration-300 hover:bg-[#e6a50] hover:-translate-y-1"
             onClick={() => {
               // Filter the restaurant cards and update the UI
-              // search text
+              // search text 
 
               const filteredRestaurant = ListOfRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(SearchText.toLowerCase())
@@ -89,16 +89,16 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
-        <div>
+        {/* <div>
           <label htmlFor="name">UserName :</label>
           <input
             className="border border-black p-2"
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />
-        </div>
+        </div> */}
       </div>
-      <div className="res-container p-5  bg-[#f9fafb] flex flex-wrap gap-5 items-center justify-evenly">
+      <div className="res-container px-[40px] bg-[#f9fafb] flex flex-wrap gap-5 items-center justify-around">
         {filteredRestaurant.map((restaurant) => (
           <Link
             className="custom-link"

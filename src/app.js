@@ -8,12 +8,13 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import {useState,useEffect} from "react";
 import RestaurantMenu from "./components/RestaurantMenu";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import Login from "./components/Login";
 // import Grocery from './components/Grocery';
 
 
@@ -44,11 +45,13 @@ const AppLayout = () => {
     setUserName(data.name);
   },[]);
 
+  const location = useLocation();
+
   return (
     <Provider store={appStore}>
     <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
     <div className="app">
-      <Header />
+      {location.pathname !== "/" && <Header />}
       <Outlet />
     </div>
     </UserContext.Provider>
@@ -63,7 +66,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <Login />,
       },
       {
         path: "/about",
@@ -84,6 +87,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart/>,
+      },
+      {
+        path: "/home",
+        element: <Body />,
       }
     ],
     errorElement: <Error />,
