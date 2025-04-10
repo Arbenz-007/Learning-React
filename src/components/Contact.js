@@ -1,7 +1,7 @@
 const Contact =()=>{
     return (
-        <div className="contact-page">
-            <div className="contact-header">
+        <div className="contact-page text-white text-lg p-5 maxw-[1200px] mx-auto bg-[#f9f9f9] rounded-xl shadow-md">
+            <div className="contact-header text-center py-40px px-20px background: linear-gradient(135deg, #ff6f61, #ff9a44) rounded-t-[10px] rounded-b-none mt-5">
                 <h1>Contact Us</h1>
                 <p>We'd love to hear from you! Reach out to us for any questions, feedback, or support.</p>
             </div>
